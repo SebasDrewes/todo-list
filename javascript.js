@@ -1,7 +1,19 @@
 const ProjectsAndTasks = (() => {
 
-    const projects = [];
+    let projects = [];
     //toDo factory
+    const saveProjects = () => {
+        localStorage.setItem("projects", JSON.stringify(projects))
+    }
+    const loadProjects = () => {
+        let storedProjects = localStorage.getItem("projects")
+        if (storedProjects === null ) {
+            projects = [];
+        }else {
+            projects = JSON.parse(storedProjects);
+
+      }
+    }
     const ToDo = (title, description, dueDate, priority) => {
         return { title, description, dueDate, priority };
     }
@@ -23,7 +35,7 @@ const ProjectsAndTasks = (() => {
     newProject.ToDos.push(pupu);
     defaultProject.ToDos.push(pepe);
     defaultProject.ToDos.push(pepa);
-
+    saveProjects();
 
     const createTask = () => {
         const ToDoTitle = prompt("titulo?")
@@ -43,15 +55,18 @@ const ProjectsAndTasks = (() => {
 
             }
         }
+        saveProjects();
     }
     const createProject = () => {
         const newProjectTitle = prompt("titulo?");
         const newProyecto = NewProject(newProjectTitle);
+        loadProjects();
         projects.push(newProyecto);
         Display.displayProjects()
         Display.displayToDos()
+        saveProjects();
     }
-    return {projects, createTask, createProject}
+    return {projects, loadProjects, saveProjects, createTask, createProject}
 })();
 
 
@@ -73,6 +88,7 @@ const Display = (() => {
         while (proyectos.firstChild) {
             proyectos.removeChild(proyectos.firstChild);
         }
+        ProjectsAndTasks.loadProjects();
         for (let i = 0; i < ProjectsAndTasks.projects.length; i++) {
             const proyectoAgregado = document.createElement('div');
             proyectoAgregado.textContent = ProjectsAndTasks.projects[i].title;
@@ -89,10 +105,10 @@ const Display = (() => {
                 while (tareas.firstChild) {
                     tareas.removeChild(tareas.firstChild);
                 }
+                ProjectsAndTasks.loadProjects();
                 for (let j = 0; j < ProjectsAndTasks.projects.length; j++) {
                     if (proyectosAgregados[i].textContent === ProjectsAndTasks.projects[j].title) {
                         currentProject.currentProject = proyectosAgregados[i];
-                        console.log(currentProject)
                         for (let l = 0; l < ProjectsAndTasks.projects[j].ToDos.length; l++) {
                             const ToDoTitle = document.createElement("p");
                             ToDoTitle.textContent = ProjectsAndTasks.projects[j].ToDos[l].title;
