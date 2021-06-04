@@ -1,27 +1,27 @@
+//projects factory
+const NewProject = (title) => {
+    const ToDos = [];
+    return { title, ToDos }
+}
+//ToDofactory
+const ToDo = (title, description, dueDate, priority) => {
+    return { title, description, dueDate, priority };
+}
 const ProjectsAndTasks = (() => {
 
     let projects = [];
     //toDo factory
     const saveProjects = () => {
-        localStorage.setItem("projects", JSON.stringify(projects))
+        localStorage.setItem("projects", JSON.stringify(ProjectsAndTasks.projects))
     }
     const loadProjects = () => {
-        let storedProjects = localStorage.getItem("projects")
-        if (storedProjects === null ) {
-            projects = [];
-        }else {
-            projects = JSON.parse(storedProjects);
+        let storedProjects = JSON.parse(localStorage.getItem("projects"))
+        if (storedProjects === null) {
+            ProjectsAndTasks.projects = [];
+        } else {
+            ProjectsAndTasks.projects = storedProjects
 
-      }
-    }
-    const ToDo = (title, description, dueDate, priority) => {
-        return { title, description, dueDate, priority };
-    }
-
-    //projects factory
-    const NewProject = (title) => {
-        const ToDos = [];
-        return { title, ToDos }
+        }
     }
 
     const defaultProject = NewProject("Default Project");
@@ -35,7 +35,8 @@ const ProjectsAndTasks = (() => {
     newProject.ToDos.push(pupu);
     defaultProject.ToDos.push(pepe);
     defaultProject.ToDos.push(pepa);
-    saveProjects();
+    //saveProjects();
+    //loadProjects();
 
     const createTask = () => {
         const ToDoTitle = prompt("titulo?")
@@ -46,40 +47,44 @@ const ProjectsAndTasks = (() => {
         const proyectosAgregados = document.querySelectorAll(".proyectosAgregados")
         for (let i = 0; i < proyectosAgregados.length; i++) {
             if (proyectosAgregados[i] === Display.currentProject.currentProject) {
-                for (let j = 0; j < projects.length; j++) {
-                    if (proyectosAgregados[i].textContent === projects[j].title) {
-                        projects[j].ToDos.push(newToDo);
+                for (let j = 0; j < ProjectsAndTasks.projects.length; j++) {
+                    if (proyectosAgregados[i].textContent === ProjectsAndTasks.projects[j].title) {
+                        ProjectsAndTasks.projects[j].ToDos.push(newToDo);
                         proyectosAgregados[i].click();
                     }
                 }
 
             }
         }
-        saveProjects();
+        //saveProjects();
+        // loadProjects();
     }
     const createProject = () => {
         const newProjectTitle = prompt("titulo?");
         const newProyecto = NewProject(newProjectTitle);
-        loadProjects();
-        projects.push(newProyecto);
+        //loadProjects();
+        ProjectsAndTasks.projects.push(newProyecto);
         Display.displayProjects()
         Display.displayToDos()
-        saveProjects();
+        //  saveProjects();
+        //  loadProjects();
     }
-    return {projects, loadProjects, saveProjects, createTask, createProject}
+    return { projects, loadProjects, saveProjects, createTask, createProject }
 })();
 
 
 
 const Display = (() => {
-    let currentProject = {currentProject:0};
+    let currentProject = { currentProject: 0 };
     const createTarea = document.querySelector("#agregarTareas")
     createTarea.addEventListener("click", () => {
         ProjectsAndTasks.createTask()
+        ProjectsAndTasks.saveProjects();
     })
     const crearProyecto = document.querySelector("#crearProyecto")
     crearProyecto.addEventListener("click", () => {
         ProjectsAndTasks.createProject()
+        ProjectsAndTasks.saveProjects();
     })
 
 
@@ -88,7 +93,6 @@ const Display = (() => {
         while (proyectos.firstChild) {
             proyectos.removeChild(proyectos.firstChild);
         }
-        ProjectsAndTasks.loadProjects();
         for (let i = 0; i < ProjectsAndTasks.projects.length; i++) {
             const proyectoAgregado = document.createElement('div');
             proyectoAgregado.textContent = ProjectsAndTasks.projects[i].title;
@@ -105,7 +109,6 @@ const Display = (() => {
                 while (tareas.firstChild) {
                     tareas.removeChild(tareas.firstChild);
                 }
-                ProjectsAndTasks.loadProjects();
                 for (let j = 0; j < ProjectsAndTasks.projects.length; j++) {
                     if (proyectosAgregados[i].textContent === ProjectsAndTasks.projects[j].title) {
                         currentProject.currentProject = proyectosAgregados[i];
@@ -130,5 +133,6 @@ const Display = (() => {
     }
     return { displayProjects, displayToDos, currentProject };
 })();
+ProjectsAndTasks.loadProjects();
 Display.displayProjects();
 Display.displayToDos();
