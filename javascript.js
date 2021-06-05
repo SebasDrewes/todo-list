@@ -60,15 +60,19 @@ const ProjectsAndTasks = (() => {
     const createProject = () => {
         const newProjectTitle = prompt("titulo?");
         //some() para que cada nombre sea unico
-        if (ProjectsAndTasks.projects.some(project => project.title === newProjectTitle)){
-        alert("Elegi otro nombre kpo")
-        }else {
-        const newProyecto = NewProject(newProjectTitle);
+        if (ProjectsAndTasks.projects.some(project => project.title === newProjectTitle)) {
+            alert("Elegi otro nombre kpo")
+        } else if (newProjectTitle === "") {
+            alert("nombres en blanco no kpo")
+        }
+        else {
+            const newProyecto = NewProject(newProjectTitle);
 
-        ProjectsAndTasks.projects.push(newProyecto);
-        Display.displayProjects()
-        Display.displayToDos()
-        }}
+            ProjectsAndTasks.projects.push(newProyecto);
+            Display.displayProjects()
+            Display.displayToDos()
+        }
+    }
 
 
 
@@ -102,6 +106,7 @@ const Display = (() => {
             proyectoAgregado.classList.add("proyectosAgregados");
             const proyectoAgregadoDelete = document.createElement('div');
             proyectoAgregadoDelete.classList.add("proyectoAgregadoDelete")
+            proyectoAgregadoDelete.textContent = "X";
             proyectoAgregadoDelete.addEventListener("click", () => {
                 delete ProjectsAndTasks.projects[i];
                 ProjectsAndTasks.projects = ProjectsAndTasks.projects.filter(e => String(e).trim());
@@ -119,11 +124,15 @@ const Display = (() => {
         const tareas = document.querySelector("#tareas");
         for (let i = 0; i < proyectosAgregados.length; i++) {
             proyectosAgregados[i].addEventListener("click", () => {
+                for (let u = 0; u < proyectosAgregados.length; u++) {
+                    proyectosAgregados[u].style.cssText = "background-color:rgb(56, 56, 56)";
+                }
+                proyectosAgregados[i].style.cssText = "background-color:rgb(56, 56, 56, 0.5)";
                 while (tareas.firstChild) {
                     tareas.removeChild(tareas.firstChild);
                 }
                 for (let j = 0; j < ProjectsAndTasks.projects.length; j++) {
-                    if (proyectosAgregados[i].textContent === ProjectsAndTasks.projects[j].title) {
+                    if (proyectosAgregados[i].textContent === (ProjectsAndTasks.projects[j].title + "X")) {
                         currentProject.currentProject = proyectosAgregados[i];
                         for (let l = 0; l < ProjectsAndTasks.projects[j].ToDos.length; l++) {
                             const ToDo = document.createElement("div");
@@ -132,13 +141,17 @@ const Display = (() => {
                             ToDoTitle.classList.add("ToDoTitle");
                             ToDoTitle.textContent = ProjectsAndTasks.projects[j].ToDos[l].title;
                             const ToDoDescripcion = document.createElement("p");
+                            ToDoDescripcion.classList.add("ToDoInfo");
                             ToDoDescripcion.textContent = ProjectsAndTasks.projects[j].ToDos[l].description;
                             const ToDoDueDate = document.createElement("p");
+                            ToDoDueDate.classList.add("ToDoInfo");
                             ToDoDueDate.textContent = ProjectsAndTasks.projects[j].ToDos[l].dueDate;
                             const ToDoPriority = document.createElement("p");
+                            ToDoPriority.classList.add("ToDoInfo");
                             ToDoPriority.textContent = ProjectsAndTasks.projects[j].ToDos[l].priority;
-                            const ToDoDelete = document.createElement("p");
-                            ToDoDelete.textContent = "borrar tarea";
+                            const ToDoDelete = document.createElement("div");
+                            ToDoDelete.textContent = "X";
+                            ToDoDelete.classList.add("ToDoDelete");
                             ToDoDelete.addEventListener("click", () => {
                                 delete ProjectsAndTasks.projects[j].ToDos[l];
                                 ProjectsAndTasks.projects[j].ToDos = ProjectsAndTasks.projects[j].ToDos.filter(x => x !== null);
