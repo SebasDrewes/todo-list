@@ -35,8 +35,7 @@ const ProjectsAndTasks = (() => {
     newProject.ToDos.push(pupu);
     defaultProject.ToDos.push(pepe);
     defaultProject.ToDos.push(pepa);
-    //saveProjects();
-    //loadProjects();
+
 
     const createTask = () => {
         const ToDoTitle = prompt("titulo?")
@@ -56,19 +55,23 @@ const ProjectsAndTasks = (() => {
 
             }
         }
-        //saveProjects();
-        // loadProjects();
+
     }
     const createProject = () => {
         const newProjectTitle = prompt("titulo?");
+        //some() para que cada nombre sea unico
+        if (ProjectsAndTasks.projects.some(project => project.title === newProjectTitle)){
+        alert("Elegi otro nombre kpo")
+        }else {
         const newProyecto = NewProject(newProjectTitle);
-        //loadProjects();
+
         ProjectsAndTasks.projects.push(newProyecto);
         Display.displayProjects()
         Display.displayToDos()
-        //  saveProjects();
-        //  loadProjects();
-    }
+        }}
+
+
+
     return { projects, loadProjects, saveProjects, createTask, createProject }
 })();
 
@@ -97,7 +100,17 @@ const Display = (() => {
             const proyectoAgregado = document.createElement('div');
             proyectoAgregado.textContent = ProjectsAndTasks.projects[i].title;
             proyectoAgregado.classList.add("proyectosAgregados");
+            const proyectoAgregadoDelete = document.createElement('div');
+            proyectoAgregadoDelete.classList.add("proyectoAgregadoDelete")
+            proyectoAgregadoDelete.addEventListener("click", () => {
+                delete ProjectsAndTasks.projects[i];
+                ProjectsAndTasks.projects = ProjectsAndTasks.projects.filter(e => String(e).trim());
+                ProjectsAndTasks.saveProjects();
+                displayProjects();
+                displayToDos();
+            })
             proyectos.appendChild(proyectoAgregado);
+            proyectoAgregado.appendChild(proyectoAgregadoDelete)
         }
     }
 
@@ -113,7 +126,10 @@ const Display = (() => {
                     if (proyectosAgregados[i].textContent === ProjectsAndTasks.projects[j].title) {
                         currentProject.currentProject = proyectosAgregados[i];
                         for (let l = 0; l < ProjectsAndTasks.projects[j].ToDos.length; l++) {
+                            const ToDo = document.createElement("div");
+                            ToDo.classList.add("ToDo");
                             const ToDoTitle = document.createElement("p");
+                            ToDoTitle.classList.add("ToDoTitle");
                             ToDoTitle.textContent = ProjectsAndTasks.projects[j].ToDos[l].title;
                             const ToDoDescripcion = document.createElement("p");
                             ToDoDescripcion.textContent = ProjectsAndTasks.projects[j].ToDos[l].description;
@@ -121,10 +137,20 @@ const Display = (() => {
                             ToDoDueDate.textContent = ProjectsAndTasks.projects[j].ToDos[l].dueDate;
                             const ToDoPriority = document.createElement("p");
                             ToDoPriority.textContent = ProjectsAndTasks.projects[j].ToDos[l].priority;
-                            tareas.appendChild(ToDoTitle);
-                            tareas.appendChild(ToDoDescripcion);
-                            tareas.appendChild(ToDoDueDate);
-                            tareas.appendChild(ToDoPriority);
+                            const ToDoDelete = document.createElement("p");
+                            ToDoDelete.textContent = "borrar tarea";
+                            ToDoDelete.addEventListener("click", () => {
+                                delete ProjectsAndTasks.projects[j].ToDos[l];
+                                ProjectsAndTasks.projects[j].ToDos = ProjectsAndTasks.projects[j].ToDos.filter(x => x !== null);
+                                ProjectsAndTasks.saveProjects();
+                                proyectosAgregados[i].click();
+                            })
+                            tareas.appendChild(ToDo);
+                            ToDo.appendChild(ToDoTitle);
+                            ToDo.appendChild(ToDoDescripcion);
+                            ToDo.appendChild(ToDoDueDate);
+                            ToDo.appendChild(ToDoPriority);
+                            ToDo.appendChild(ToDoDelete);
                         }
                     }
                 }

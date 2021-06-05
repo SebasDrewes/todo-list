@@ -1,7 +1,63 @@
 * {
     box-sizing: border-box;
 }
+body {
+    background: rgb(56, 56, 56);
+}
 #container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    background-color: grey;
+    color: white;
+    margin: 5vw;
+    margin-top: 0;
+    font-size: 5vh;
+    text-align: center;
+    border-radius: 5%;
+}
+#crearProyecto {
+border:solid;
+color:turquoise;
+margin-left: 3vw;
+margin-right: 3vw;
+margin-bottom: 0;
+}
+.proyectoAgregadoDelete {
+    border:solid;
+    width:1vw;
+    height: vh;
+}
+#agregarTareas {
+    border:solid;
+    color:turquoise;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-bottom: 0;
+}
+.proyectosAgregados {
+    padding: 1vw;
+    border:solid;
+    border-radius: 5%;
+    background-color:rgb(56, 56, 56);
+    margin: 2vh;
+}
+.ToDo {
+    padding: 1vw;
+    border:solid;
+    border-radius: 5%;
+    background-color:rgb(56, 56, 56);
+    margin: 2vh;
+}
+.ToDoTitle {
+    padding: 1vw;
+    border-bottom:solid;
+    border-radius: 5%;
+    background-color:rgb(56, 56, 56);
+    margin: 2vh;
+}
+#title {
+    margin: 0;
+    font-size: 16vh;
+    color:white;
+    text-align: center;
 }
