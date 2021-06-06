@@ -58,19 +58,23 @@ const ProjectsAndTasks = (() => {
 
     }
     const createProject = () => {
-        const newProjectTitle = prompt("titulo?");
+        const newProjectTitleSpace = document.querySelector(".newProjectTitleSpace");
+        const newProjectTitle = newProjectTitleSpace.value;
         //some() para que cada nombre sea unico
         if (ProjectsAndTasks.projects.some(project => project.title === newProjectTitle)) {
             alert("Elegi otro nombre kpo")
         } else if (newProjectTitle === "") {
             alert("nombres en blanco no kpo")
+        } else if (newProjectTitle.length >= 15){
+            alert("no mas de 15 caracteres")
         }
         else {
             const newProyecto = NewProject(newProjectTitle);
-
             ProjectsAndTasks.projects.push(newProyecto);
             Display.displayProjects()
             Display.displayToDos()
+            const crearProyecto = document.querySelector("#crearProyecto")
+            crearProyecto.addEventListener("click", Display.crearProyectoDisplay)
         }
     }
 
@@ -82,21 +86,53 @@ const ProjectsAndTasks = (() => {
 
 
 const Display = (() => {
+    const proyectos = document.querySelector("#projects");
     let currentProject = { currentProject: 0 };
     const createTarea = document.querySelector("#agregarTareas")
     createTarea.addEventListener("click", () => {
         ProjectsAndTasks.createTask()
         ProjectsAndTasks.saveProjects();
     })
+    const crearProyectoDisplay = () => {
+        crearProyecto.removeEventListener("click", crearProyectoDisplay)
+        const newProject = document.createElement("div");
+        newProject.classList.add("newProject")
+        const newProjectTitle= document.createElement("p");
+        newProjectTitle.textContent = "Titulo:"
+        newProjectTitle.classList.add("newProjectTitle")
+        const newProjectTitleSpace = document.createElement("input");
+        newProjectTitleSpace.setAttribute("type", "text");
+        newProjectTitleSpace.setAttribute("placeholder", "Nueva lista");
+        newProjectTitleSpace.classList.add("newProjectTitleSpace")
+        const newProjectSave = document.createElement("p");
+        newProjectSave.textContent = "Guardar";
+        newProjectSave.classList.add("newProjectSave")
+        const newProjectCancel = document.createElement("p");
+        newProjectCancel.textContent = "Cancelar";
+        newProjectCancel.classList.add("newProjectCancel")
+        newProjectSave.addEventListener("click", () => {
+            ProjectsAndTasks.createProject();
+            ProjectsAndTasks.saveProjects();
+        })
+        newProjectCancel.addEventListener("click", () => {
+            crearProyecto.addEventListener("click", crearProyectoDisplay)
+            Display.displayProjects();
+            Display.displayToDos();
+        })
+        proyectos.appendChild(newProject);
+        newProject.appendChild(newProjectTitle);
+        newProject.appendChild(newProjectTitleSpace);
+        newProject.appendChild(newProjectSave);
+        newProject.appendChild(newProjectCancel);
+    }
     const crearProyecto = document.querySelector("#crearProyecto")
-    crearProyecto.addEventListener("click", () => {
-        ProjectsAndTasks.createProject()
-        ProjectsAndTasks.saveProjects();
-    })
+    crearProyecto.addEventListener("click", crearProyectoDisplay)
+    
+       // ProjectsAndTasks.createProject();
+      // ProjectsAndTasks.saveProjects();
 
 
     const displayProjects = () => {
-        const proyectos = document.querySelector("#projects");
         while (proyectos.firstChild) {
             proyectos.removeChild(proyectos.firstChild);
         }
@@ -124,10 +160,15 @@ const Display = (() => {
         const tareas = document.querySelector("#tareas");
         for (let i = 0; i < proyectosAgregados.length; i++) {
             proyectosAgregados[i].addEventListener("click", () => {
+                //loop para volver al color original proyectos no seleccionados
+                document.querySelector("#agregarTareas").style.cssText = "visibility: visible";
                 for (let u = 0; u < proyectosAgregados.length; u++) {
-                    proyectosAgregados[u].style.cssText = "background-color:rgb(56, 56, 56)";
+                    proyectosAgregados[u].classList.remove("proyectosAgregadosClick")
+                    proyectosAgregados[u].classList.add("proyectosAgregados")
                 }
-                proyectosAgregados[i].style.cssText = "background-color:rgb(56, 56, 56, 0.5)";
+                //al proyecto seleccionado, cambia background-color
+                proyectosAgregados[i].classList.remove("proyectosAgregados")
+                proyectosAgregados[i].classList.add("proyectosAgregadosClick")
                 while (tareas.firstChild) {
                     tareas.removeChild(tareas.firstChild);
                 }
@@ -170,7 +211,7 @@ const Display = (() => {
             })
         }
     }
-    return { displayProjects, displayToDos, currentProject };
+    return { displayProjects, displayToDos, currentProject ,crearProyectoDisplay};
 })();
 ProjectsAndTasks.loadProjects();
 Display.displayProjects();
