@@ -59,7 +59,6 @@ cursor: pointer;
     color:turquoise;
     margin: 0;
     cursor: pointer;
-    visibility: hidden;
 }
 #agregarTareas:hover {
     opacity: 75%;

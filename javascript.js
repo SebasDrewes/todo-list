@@ -101,12 +101,9 @@ const Display = (() => {
         crearProyecto.removeEventListener("click", crearProyectoDisplay)
         const newProject = document.createElement("div");
         newProject.classList.add("newProject")
-        const newProjectTitle= document.createElement("p");
-        newProjectTitle.textContent = "Titulo:"
-        newProjectTitle.classList.add("newProjectTitle")
         const newProjectTitleSpace = document.createElement("input");
         newProjectTitleSpace.setAttribute("type", "text");
-        newProjectTitleSpace.setAttribute("placeholder", "Nueva lista");
+        newProjectTitleSpace.setAttribute("placeholder", "Titulo nueva lista");
         newProjectTitleSpace.classList.add("newProjectTitleSpace")
         const newProjectSave = document.createElement("p");
         newProjectSave.textContent = "Guardar";
@@ -124,7 +121,6 @@ const Display = (() => {
             Display.displayToDos();
         })
         proyectos.appendChild(newProject);
-        newProject.appendChild(newProjectTitle);
         newProject.appendChild(newProjectTitleSpace);
         newProject.appendChild(newProjectSave);
         newProject.appendChild(newProjectCancel);
@@ -136,6 +132,7 @@ const Display = (() => {
       // ProjectsAndTasks.saveProjects();
 
       const crearTaskDisplay = () => {
+        if (ProjectsAndTasks.projects[0] !== undefined  && Display.currentProject.currentProject !== 0){
         agregarTareas.removeEventListener("click", crearTaskDisplay);
         const newTask = document.createElement("div");
         newTask.classList.add("newTask")
@@ -188,7 +185,7 @@ const Display = (() => {
         newTask.appendChild(newTaskSave)
         newTask.appendChild(newTaskCancel)
 
-    }
+      }}
     const agregarTareas = document.querySelector("#agregarTareas");
     agregarTareas.addEventListener("click", crearTaskDisplay)
 
@@ -220,6 +217,10 @@ const Display = (() => {
         const tareas = document.querySelector("#tareas");
         for (let i = 0; i < proyectosAgregados.length; i++) {
             proyectosAgregados[i].addEventListener("click", () => {
+                const newProjectCancel = document.querySelector(".newProjectCancel")
+                if (newProjectCancel !== null){
+                newProjectCancel.click();
+                }
                 agregarTareas.addEventListener("click", crearTaskDisplay)
                 //loop para volver al color original proyectos no seleccionados
                 document.querySelector("#agregarTareas").style.cssText = "visibility: visible";
