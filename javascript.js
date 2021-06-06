@@ -38,24 +38,33 @@ const ProjectsAndTasks = (() => {
 
 
     const createTask = () => {
-        const ToDoTitle = prompt("titulo?")
-        const ToDoDescription = prompt("description?")
-        const ToDoFecha = prompt("duedate?")
-        const ToDoPriority = prompt("prioidad?")
+        const newTaskTitle = document.querySelector(".newTaskTitle")
+        const newTaskDescription = document.querySelector(".newTaskDescription")
+        const newTaskFecha = document.querySelector(".newTaskFecha")
+        const newTaskPriority = document.querySelector(".newTaskPriority")
+        const newToDoTitle = newTaskTitle.value;
+        const newToDoDescription = newTaskDescription.value;
+        const newToDoFecha = newTaskFecha.value;
+        const newToDoPriority = newTaskPriority.value;
+        const ToDoTitle = newToDoTitle
+        const ToDoDescription = newToDoDescription
+        const ToDoFecha = newToDoFecha
+        const ToDoPriority = newToDoPriority
         const newToDo = ToDo(ToDoTitle, ToDoDescription, ToDoFecha, ToDoPriority)
         const proyectosAgregados = document.querySelectorAll(".proyectosAgregados")
         for (let i = 0; i < proyectosAgregados.length; i++) {
-            if (proyectosAgregados[i] === Display.currentProject.currentProject) {
+            if (proyectosAgregados[i].textContent === Display.currentProject.currentProject.textContent) {
                 for (let j = 0; j < ProjectsAndTasks.projects.length; j++) {
-                    if (proyectosAgregados[i].textContent === ProjectsAndTasks.projects[j].title) {
+                    if (proyectosAgregados[i].textContent === ProjectsAndTasks.projects[j].title + "X") {
                         ProjectsAndTasks.projects[j].ToDos.push(newToDo);
                         proyectosAgregados[i].click();
+                        const agregarTareas = document.querySelector("#agregarTareas");
+                        agregarTareas.addEventListener("click", Display.crearTaskDisplay);
                     }
                 }
-
+    
             }
         }
-
     }
     const createProject = () => {
         const newProjectTitleSpace = document.querySelector(".newProjectTitleSpace");
@@ -88,11 +97,6 @@ const ProjectsAndTasks = (() => {
 const Display = (() => {
     const proyectos = document.querySelector("#projects");
     let currentProject = { currentProject: 0 };
-    const createTarea = document.querySelector("#agregarTareas")
-    createTarea.addEventListener("click", () => {
-        ProjectsAndTasks.createTask()
-        ProjectsAndTasks.saveProjects();
-    })
     const crearProyectoDisplay = () => {
         crearProyecto.removeEventListener("click", crearProyectoDisplay)
         const newProject = document.createElement("div");
@@ -131,6 +135,62 @@ const Display = (() => {
        // ProjectsAndTasks.createProject();
       // ProjectsAndTasks.saveProjects();
 
+      const crearTaskDisplay = () => {
+        agregarTareas.removeEventListener("click", crearTaskDisplay);
+        const newTask = document.createElement("div");
+        newTask.classList.add("newTask")
+        const newTaskTitle = document.createElement("input");
+        newTaskTitle.classList.add("newTaskTitle");
+        newTaskTitle.setAttribute("type", "text");
+        newTaskTitle.setAttribute("placeholder", "Titulo");
+        const newTaskDescription = document.createElement("input");
+        newTaskDescription.classList.add("newTaskDescription");
+        newTaskDescription.setAttribute("type", "text");
+        newTaskDescription.setAttribute("placeholder", "Descripcion");
+        const newTaskFecha = document.createElement("input");
+        newTaskFecha.classList.add("newTaskFecha");
+        newTaskFecha.setAttribute("type", "text");
+        newTaskFecha.setAttribute("placeholder", "Fecha");
+        const newTaskPriority = document.createElement("input");
+        newTaskPriority.classList.add("newTaskPriority");
+        newTaskPriority.setAttribute("type", "text");
+        newTaskPriority.setAttribute("placeholder", "Priority");
+        const newTaskSave = document.createElement("p");
+        newTaskSave.textContent = "Guardar";
+        newTaskSave.classList.add("newTaskSave")
+        const newTaskCancel = document.createElement("p");
+        newTaskCancel.textContent = "Cancelar";
+        newTaskCancel.classList.add("newTaskCancel")
+        newTaskSave.addEventListener("click", () => {
+            ProjectsAndTasks.createTask();
+            ProjectsAndTasks.saveProjects();
+        })
+        newTaskCancel.addEventListener("click", () => {
+            agregarTareas.addEventListener("click", crearTaskDisplay);
+            const proyectosAgregados = document.querySelectorAll(".proyectosAgregados")
+            for (let i = 0; i < proyectosAgregados.length; i++) {
+                if (proyectosAgregados[i].textContent === Display.currentProject.currentProject.textContent) {
+                    for (let j = 0; j < ProjectsAndTasks.projects.length; j++) {
+                        if (proyectosAgregados[i].textContent === ProjectsAndTasks.projects[j].title + "X") {
+                            proyectosAgregados[i].click();
+                        }
+                    }
+                }
+            }
+            Display.displayProjects();
+            Display.displayToDos();
+        })
+        tareas.appendChild(newTask);
+        newTask.appendChild(newTaskTitle)
+        newTask.appendChild(newTaskDescription)
+        newTask.appendChild(newTaskFecha)
+        newTask.appendChild(newTaskPriority)
+        newTask.appendChild(newTaskSave)
+        newTask.appendChild(newTaskCancel)
+
+    }
+    const agregarTareas = document.querySelector("#agregarTareas");
+    agregarTareas.addEventListener("click", crearTaskDisplay)
 
     const displayProjects = () => {
         while (proyectos.firstChild) {
@@ -160,15 +220,16 @@ const Display = (() => {
         const tareas = document.querySelector("#tareas");
         for (let i = 0; i < proyectosAgregados.length; i++) {
             proyectosAgregados[i].addEventListener("click", () => {
+                agregarTareas.addEventListener("click", crearTaskDisplay)
                 //loop para volver al color original proyectos no seleccionados
                 document.querySelector("#agregarTareas").style.cssText = "visibility: visible";
-                for (let u = 0; u < proyectosAgregados.length; u++) {
+               /* for (let u = 0; u < proyectosAgregados.length; u++) {
                     proyectosAgregados[u].classList.remove("proyectosAgregadosClick")
                     proyectosAgregados[u].classList.add("proyectosAgregados")
                 }
                 //al proyecto seleccionado, cambia background-color
                 proyectosAgregados[i].classList.remove("proyectosAgregados")
-                proyectosAgregados[i].classList.add("proyectosAgregadosClick")
+                proyectosAgregados[i].classList.add("proyectosAgregadosClick")*/
                 while (tareas.firstChild) {
                     tareas.removeChild(tareas.firstChild);
                 }
@@ -211,7 +272,7 @@ const Display = (() => {
             })
         }
     }
-    return { displayProjects, displayToDos, currentProject ,crearProyectoDisplay};
+    return { displayProjects, displayToDos, currentProject ,crearProyectoDisplay, crearTaskDisplay};
 })();
 ProjectsAndTasks.loadProjects();
 Display.displayProjects();
