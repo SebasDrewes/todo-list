@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+  100% {opacity:1;}
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: "Arial";
+    background: rgb(56, 56, 56);
+    height: 100%;
+}
+#container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: grey;
+    padding: 2vh;
+    color: white;
+    margin: 5vw;
+    margin-top: 0;
+    font-size: 5vh;
+    text-align: center;
+    border-radius: 0.3em;
+}
+#crearProyecto {
+color:turquoise;
+margin: 0;
+cursor: pointer;
+}
+#crearProyecto:hover {
+    opacity: 75%;
+}
+#crearProyectoClicked {
+    color:turquoise;
+    margin: 0;
+}
+.proyectoAgregadoDelete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 2.5vh;
+    color: rgb(255, 0, 0);
+}
+.ToDoDelete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 2.5vh;
+    color: rgb(255, 0, 0);
+    cursor: pointer;
+}
+#projects {
+    margin:0;
+}
+#agregarTareas {
+    animation: fadeIn 1s;
+    color:turquoise;
+    margin: 0;
+    cursor: pointer;
+}
+#agregarTareas:hover {
+    opacity: 75%;
+}
+.proyectosAgregados {
+    animation: fadeIn 0.5s;
+    position: relative;
+    padding: 1vw;
+    border-radius: 0.3em;
+    background-color:rgb(56, 56, 56);
+    margin: 2vh;
+    cursor: pointer;
+}
+.proyectosAgregados:hover {
+    background-color:rgb(56, 56, 56, 0.5);
+}
+.proyectosAgregadosClick {
+    animation: fadeIn 0.5s;
+    position: relative;
+    padding: 1vw;
+    border-radius: 0.3em;
+    background-color:rgb(56, 56, 56, 0.5);
+    margin: 2vh;
+    cursor: pointer;
+}
+#tareas {
+    margin: 0;
+}
+.ToDo {
+    animation: fadeIn 1s;
+    position: relative;
+    border-radius: 0.3em;
+    background-color:rgb(56, 56, 56);
+    margin: 2vh;
+    height: auto;
+}
+.ToDoTitle {
+    padding: 1vw;
+    border-bottom:inset;
+    background-color:rgb(56, 56, 56);
+    margin: 2vh;
+}
+.ToDoInfo {
+    margin:0;
+}
+#title {
+    margin: 0;
+    font-size: 16vh;
+    color:white;
+    text-align: center;
+}
+.newProject {
+    animation: fadeIn 0.5s;
+    position: relative;
+    padding: 1vw;
+    border-radius: 0.3em;
+    border: 1px;
+    border-style: dashed solid;
+    border-color: turquoise;
+    background-color: rgb(56, 56, 56);
+    height: auto;
+    flex-direction: column;
+    margin: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.newProjectTitle {
+    margin: 0;
+}
+.newProjectSave {
+    margin:0;
+}
+.newProjectCancel {
+    margin: 0;
+}
+.newProjectTitleSpace{
+    background-color:rgb(85, 85, 85);
+    height: 5vh;
+    border: hidden;
+    border-radius: 0.3em;
+    font-family: "Arial";
+    text-align: center;
+    max-width: 70vw;
+    font-size: 5vh;
+    color: white;
+    min-width: 0;
+}
+::placeholder {
+    opacity: 1;
+    color: white;
+}
+.newTask {
+    animation: fadeIn 0.5s;
+    position: relative;
+    padding: 1vw;
+    border-radius: 0.3em;
+    border: 1px;
+    border-style: dashed solid;
+    border-color: turquoise;
+    background-color: rgb(56, 56, 56);
+    height: auto;
+    flex-direction: column;
+    margin: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.newTaskTitle {
+    background-color:rgb(85, 85, 85);
+    height: 5vh;
+    border: hidden;
+    margin: 1vh;
+    border-radius: 0.3em;
+    font-family: "Arial";
+    text-align: center;
+    max-width: 70vw;
+    font-size: 5vh;
+    color: white;
+    min-width: 0;
+}
+.newTaskDescription {
+    background-color:rgb(85, 85, 85);
+    height: 5vh;
+    margin: 1vh;
+    border: hidden;
+    border-radius: 0.3em;
+    font-family: "Arial";
+    text-align: center;
+    max-width: 70vw;
+    font-size: 5vh;
+    color: white;
+    min-width: 0;
+}
+.newTaskFecha {
+    background-color:rgb(85, 85, 85);
+    height: 5vh;
+    margin: 1vh;
+    border: hidden;
+    border-radius: 0.3em;
+    font-family: "Arial";
+    text-align: center;
+    max-width: 70vw;
+    font-size: 5vh;
+    color: white;
+    min-width: 0;
+}
+.newTaskPriority {
+    margin: 1vh;
+    background-color:rgb(85, 85, 85);
+    height: 5vh;
+    border: hidden;
+    border-radius: 0.3em;
+    font-family: "Arial";
+    text-align: center;
+    max-width: 70vw;
+    font-size: 5vh;
+    color: white;
+    min-width: 0;
+}
+.newTaskSave {
+    margin:0;
+}
+.newTaskCancel {
+    margin: 0;
+}
+
+
+@media only screen and (max-width: 1030px) {
+    .newProject {
+        grid-area: newProject;
+    }
+    #projects {
+    grid-area: projects;
+    }
+    #tareas {
+    grid-area: tareas;
+    }
+    #agregarTareas {
+    grid-area: agregarTareas;
+    }
+    #crearProyecto {
+    grid-area: crearProyecto;
+    }
+    #container {
+        grid-template-columns: 1fr;
+        grid-template-areas:"crearProyecto"
+                            "projects"
+                            "newProject"
+                            "agregarTareas"
+                            "tareas"
+                            ;
+    }
+}
