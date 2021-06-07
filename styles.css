@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200&display=swap');
 
 @keyframes fadeIn {
     0% {opacity:0;}
@@ -41,14 +41,14 @@ cursor: pointer;
     top: 5px;
     right: 5px;
     font-size: 2.5vh;
-    color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
 }
 .ToDoDelete {
     position: absolute;
     top: 5px;
     right: 5px;
     font-size: 2.5vh;
-    color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 #projects {
@@ -98,7 +98,6 @@ cursor: pointer;
 .ToDoTitle {
     padding: 1vw;
     border-bottom:inset;
-    background-color:rgb(56, 56, 56);
     margin: 2vh;
 }
 .ToDoInfo {
@@ -106,7 +105,8 @@ cursor: pointer;
 }
 #title {
     margin: 0;
-    font-size: 16vh;
+    font-size: 12vh;
+    font-family: sans-serif;
     color:white;
     text-align: center;
 }
@@ -121,7 +121,7 @@ cursor: pointer;
     background-color: rgb(56, 56, 56);
     height: auto;
     flex-direction: column;
-    margin: 2vh;
+    margin: 1vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -163,7 +163,8 @@ cursor: pointer;
     height: auto;
     flex-direction: column;
     margin: 2vh;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: space-between;
 }
@@ -175,12 +176,11 @@ cursor: pointer;
     border-radius: 0.3em;
     font-family: "Arial";
     text-align: center;
-    max-width: 70vw;
+    width: 95%;
     font-size: 5vh;
     color: white;
-    min-width: 0;
 }
-.newTaskDescription {
+.newTaskNota {
     background-color:rgb(85, 85, 85);
     height: 5vh;
     margin: 1vh;
@@ -188,10 +188,9 @@ cursor: pointer;
     border-radius: 0.3em;
     font-family: "Arial";
     text-align: center;
-    max-width: 70vw;
-    font-size: 5vh;
+    width: 95%;
+    font-size: 4vh;
     color: white;
-    min-width: 0;
 }
 .newTaskFecha {
     background-color:rgb(85, 85, 85);
@@ -201,10 +200,9 @@ cursor: pointer;
     border-radius: 0.3em;
     font-family: "Arial";
     text-align: center;
-    max-width: 70vw;
-    font-size: 5vh;
+    width: 95%;
+    font-size: 4vh;
     color: white;
-    min-width: 0;
 }
 .newTaskPriority {
     margin: 1vh;
@@ -214,20 +212,51 @@ cursor: pointer;
     border-radius: 0.3em;
     font-family: "Arial";
     text-align: center;
-    max-width: 70vw;
-    font-size: 5vh;
+    width: 95%;
+    font-size: 4vh;
     color: white;
-    min-width: 0;
+    cursor:pointer;
 }
 .newTaskSave {
     margin:0;
+    cursor:pointer;
 }
 .newTaskCancel {
     margin: 0;
+    cursor:pointer;
 }
 
-
+.footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-top: solid #515152 1px;
+    height: 10vh;
+    position : relative;
+    width: 100%; 
+    bottom : 0px;
+}
+.footerContent {
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: flex-end;
+}
+.github {
+    height: 1.5em;
+    height: 1.5em;
+    margin-left: 1vh;
+    margin-top: 2vh;
+    cursor: pointer;
+}
+.github:hover {
+    opacity: 0.5;
+}
 @media only screen and (max-width: 1030px) {
+    #title {
+        font-size: 8vh;
+
+    }
     .newProject {
         grid-area: newProject;
     }
