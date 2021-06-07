@@ -24,13 +24,6 @@ const ProjectsAndTasks = (() => {
         }
     }
 
-    const defaultProject = NewProject("Lista Uno");
-    const defaultTask = ToDo("Prueba", "Prueba", "Hoy", "Prioridad Alta", false)
-
-    projects.push(defaultProject);
-    defaultProject.ToDos.push(defaultTask);
-
-
     const createTask = () => {
         const newTaskTitle = document.querySelector(".newTaskTitle")
         const newTaskNota = document.querySelector(".newTaskNota")
