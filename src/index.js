@@ -1,4 +1,7 @@
+
+
 //projects factory
+
 const NewProject = (title) => {
     const ToDos = [];
     return { title, ToDos }
@@ -98,6 +101,10 @@ const Display = (() => {
     const proyectos = document.querySelector("#projects");
     let currentProject = { currentProject: 0 };
     const crearProyectoDisplay = () => {
+        const newTaskCancel = document.querySelector(".newTaskCancel")
+        if (newTaskCancel !== null) {
+        newTaskCancel.click();
+    }
         crearProyecto.removeEventListener("click", crearProyectoDisplay)
         const newProject = document.createElement("div");
         newProject.classList.add("newProject")
@@ -128,11 +135,13 @@ const Display = (() => {
     const crearProyecto = document.querySelector("#crearProyecto")
     crearProyecto.addEventListener("click", crearProyectoDisplay)
     
-       // ProjectsAndTasks.createProject();
-      // ProjectsAndTasks.saveProjects();
 
       const crearTaskDisplay = () => {
         if (ProjectsAndTasks.projects[0] !== undefined  && Display.currentProject.currentProject !== 0){
+        const newProjectCancel = document.querySelector(".newProjectCancel")
+        if (newProjectCancel !== null) {
+        newProjectCancel.click();
+    }
         agregarTareas.removeEventListener("click", crearTaskDisplay);
         const newTask = document.createElement("div");
         newTask.classList.add("newTask")
@@ -146,8 +155,10 @@ const Display = (() => {
         newTaskDescription.setAttribute("placeholder", "Descripcion");
         const newTaskFecha = document.createElement("input");
         newTaskFecha.classList.add("newTaskFecha");
-        newTaskFecha.setAttribute("type", "text");
+        newTaskFecha.setAttribute("type", "date");
         newTaskFecha.setAttribute("placeholder", "Fecha");
+        newTaskFecha.setAttribute("onfocus","(this.type='date')")
+        newTaskFecha.setAttribute("onblur","(this.type='text')")
         const newTaskPriority = document.createElement("input");
         newTaskPriority.classList.add("newTaskPriority");
         newTaskPriority.setAttribute("type", "text");
@@ -224,13 +235,11 @@ const Display = (() => {
                 agregarTareas.addEventListener("click", crearTaskDisplay)
                 //loop para volver al color original proyectos no seleccionados
                 document.querySelector("#agregarTareas").style.cssText = "visibility: visible";
-               /* for (let u = 0; u < proyectosAgregados.length; u++) {
-                    proyectosAgregados[u].classList.remove("proyectosAgregadosClick")
-                    proyectosAgregados[u].classList.add("proyectosAgregados")
-                }
-                //al proyecto seleccionado, cambia background-color
-                proyectosAgregados[i].classList.remove("proyectosAgregados")
-                proyectosAgregados[i].classList.add("proyectosAgregadosClick")*/
+               for (let u = 0; u < proyectosAgregados.length; u++) {
+                    proyectosAgregados[u].style.background = "rgb(56, 56, 56)"
+               }
+                //al proyecto seleccionado, cambia background-color*/
+                proyectosAgregados[i].style.background = "rgb(56, 56, 56, 0.5)"
                 while (tareas.firstChild) {
                     tareas.removeChild(tareas.firstChild);
                 }
@@ -278,3 +287,4 @@ const Display = (() => {
 ProjectsAndTasks.loadProjects();
 Display.displayProjects();
 Display.displayToDos();
+
