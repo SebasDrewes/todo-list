@@ -16,13 +16,19 @@ const ProjectsAndTasks = (() => {
     }
     const loadProjects = () => {
         let storedProjects = JSON.parse(localStorage.getItem("projects"))
-        if (storedProjects === null) {
-            ProjectsAndTasks.projects = [];
+        if (storedProjects.length === 0) {
+            const test = NewProject("Lista default")
+            const testToDo = ToDo("Test","Test nota","Mañana","Prioridad Media", false)
+            test.ToDos.push(testToDo)
+            ProjectsAndTasks.projects.push(test)
+            Display.displayProjects();
+            Display.displayToDos();
         } else {
             ProjectsAndTasks.projects = storedProjects
 
         }
     }
+
 
     const createTask = () => {
         const newTaskTitle = document.querySelector(".newTaskTitle")
