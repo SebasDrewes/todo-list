@@ -67,6 +67,7 @@ cursor: pointer;
     background-color:rgb(56, 56, 56);
     margin: 2vh;
     cursor: pointer;
+    word-wrap: break-word;
 }
 .proyectosAgregados:hover {
     background-color:rgb(56, 56, 56, 0.5);
@@ -95,9 +96,11 @@ cursor: pointer;
     padding: 1vw;
     border-bottom:inset;
     margin: 2vh;
+    word-wrap: break-word;
 }
 .ToDoInfo {
     margin:0;
+    word-wrap: break-word;
 }
 #title {
     margin: 0;
@@ -108,6 +111,7 @@ cursor: pointer;
 }
 .newProject {
     animation: fadeIn 0.5s;
+    word-wrap: break-word;
     position: relative;
     padding: 1vw;
     border-radius: 0.3em;
@@ -123,6 +127,7 @@ cursor: pointer;
     justify-content: space-between;
 }
 .newProjectTitle {
+    word-wrap: break-word;
     margin: 0;
 }
 .newProjectSave {
