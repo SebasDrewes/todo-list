@@ -44,12 +44,12 @@ const ProjectsAndTasks = (() => {
         const ToDoFecha = newToDoFecha
         const ToDoPriority = newToDoPriority
         const ToDoComplete = false;
-        if (ToDoTitle.length >= 15) {
-            alert("No mas de 15 caracteres por Titulo")
-        } else if (ToDoTitle === "") {
+       /* if (ToDoTitle.length >= 15) {
+            alert("No mas de 15 caracteres por Titulo")*/
+       /* } /*else */if (ToDoTitle === "") {
             alert("Falta completar campo Titulo")
-        } else if (ToDoNota.length >= 15) {
-            alert("No mas de 15 caracteres por Nota")
+       /* } else if (ToDoNota.length >= 15) {
+            alert("No mas de 15 caracteres por Nota")*/
         } else if (ToDoPriority === "Prioridad") {
             alert("Por favor elige Prioridad")
         } else {
@@ -78,8 +78,8 @@ const ProjectsAndTasks = (() => {
             alert("Por favor elige otro Titulo")
         } else if (newProjectTitle === "") {
             alert("Falta completar campo Titulo")
-        } else if (newProjectTitle.length >= 15) {
-            alert("No mas de 15 caracteres por Titulo")
+       /* } else if (newProjectTitle.length >= 15) {
+            alert("No mas de 15 caracteres por Titulo")*/
         }
         else {
             const newProyecto = NewProject(newProjectTitle);
