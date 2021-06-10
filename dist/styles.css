@@ -190,7 +190,7 @@ cursor: pointer;
     font-family: "Arial";
     text-align: center;
     width: 95%;
-    font-size: 4vh;
+    font-size: 5vh;
     color: white;
 }
 .newTaskFecha {
@@ -202,7 +202,7 @@ cursor: pointer;
     font-family: "Arial";
     text-align: center;
     width: 95%;
-    font-size: 4vh;
+    font-size: 5vh;
     color: white;
 }
 .newTaskPriority {
@@ -214,7 +214,7 @@ cursor: pointer;
     font-family: "Arial";
     text-align: center;
     width: 95%;
-    font-size: 4vh;
+    font-size: 5vh;
     color: white;
     cursor:pointer;
 }
