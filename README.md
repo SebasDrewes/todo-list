@@ -1,9 +1,9 @@
 # todo-list
 ![image](https://user-images.githubusercontent.com/81722772/121596176-82a66900-ca15-11eb-975a-0963b32d3e28.png)
 
-Lista de tareas hecha con Vanilla Javascript y CSS, con la capacidad de crear listas y agregar tareas a cada lista, guardando cualquier cambio en localStorage.
+Lista de tareas hecha con Javascript y CSS, con la capacidad de crear listas y agregar tareas a cada lista, guardando cualquier cambio en localStorage.
 
-Realizado segun lo requerido en el proyecto: https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/todo-list
+Realizado segun lo requerido en el curso: https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/todo-list
 
 El codigo fue diseñado utilizando factories y modules, agregando de forma dinamica al DOM los elementos correspondientes de cada array de Listas y Tareas.
 La pagina mantiene un diseño Responsive, pudiendo utilizarse en dispositivos móviles.
